@@ -17,7 +17,7 @@ import * as PostController from './controllers/PostController.js';
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log('DB okey'))
-  .catch((err) => console.log('DB error', err));
+  .catch((err) => console.log('DB err', err));
 
 const app = express();
 
