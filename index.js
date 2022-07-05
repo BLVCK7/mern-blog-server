@@ -14,6 +14,7 @@ import checkAuth from './middleware/checkAuth.js';
 import handleValidationErrors from './middleware/handleValidationErrors.js';
 
 import * as PostController from './controllers/PostController.js';
+import * as CommentController from './controllers/CommentController.js';
 
 mongoose
   // .connect(process.env.MONGODB_URI)
@@ -165,6 +166,9 @@ app.patch(
   handleValidationErrors,
   PostController.update,
 );
+
+app.post('/comment/add', checkAuth, CommentController.createComment);
+// app.post('/comment/get', checkAuth, CommentController.getComment);
 
 app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
