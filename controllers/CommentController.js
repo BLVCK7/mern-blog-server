@@ -53,15 +53,17 @@ export const createComment = async (req, res) => {
   }
 };
 
-// export const getComment = async (req, res) => {
-//   try {
-//     const comments = await CommentModel.findOne({ postId: `${req._id}` });
+export const getComment = async (req, res) => {
+  try {
+    const post = await CommentModel.find({ postId: req.id });
 
-//     res.json(comments);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({
-//       message: 'Не удалось получить комментарии',
-//     });
-//   }
-// };
+    const comments = await CommentMode.find({ post });
+
+    res.json(comments);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Не удалось получить комментарии',
+    });
+  }
+};

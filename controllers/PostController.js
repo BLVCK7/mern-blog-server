@@ -1,4 +1,5 @@
 import PostModel from '../models/post.js';
+import UserModel from '../models/user.js';
 
 export const getLastTags = async (req, res) => {
   try {
@@ -148,6 +149,32 @@ export const update = async (req, res) => {
     console.log(error);
     res.status(500).json({
       message: 'Не удалось обновить статью',
+    });
+  }
+};
+
+export const createComment = async (req, res) => {
+  try {
+    const postId = req.body.id;
+
+    const user = await UserModel.find({ _id: req.userId }, { fullName: 1, avatarUrl: 1 });
+
+    await PostModel.updateOne(
+      {
+        _id: postId,
+      },
+      {
+        comments: { text: req.body.comments, user: user },
+      },
+    );
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Не удалось добавить комментарий',
     });
   }
 };

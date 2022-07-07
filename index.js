@@ -167,8 +167,7 @@ app.patch(
   PostController.update,
 );
 
-app.post('/comment/add', checkAuth, CommentController.createComment);
-// app.post('/comment/get', checkAuth, CommentController.getComment);
+app.post('/comment/add', checkAuth, PostController.createComment);
 
 app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
