@@ -176,3 +176,19 @@ export const createComment = async (req, res) => {
     });
   }
 };
+
+export const getComments = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const posts = await PostModel.find({ _id: postId }).exec();
+
+    const comments = posts.map((obj) => obj.comments).flat();
+
+    res.json(comments);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Не удалось получить комментарии',
+    });
+  }
+};

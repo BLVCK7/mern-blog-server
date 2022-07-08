@@ -170,6 +170,7 @@ app.patch(
 );
 
 app.post('/comment/add', checkAuth, PostController.createComment);
+app.get('/comment/:id', checkAuth, PostController.getComments);
 
 app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
