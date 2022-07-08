@@ -1,5 +1,4 @@
 import PostModel from '../models/post.js';
-import UserModel from '../models/user.js';
 
 export const getLastTags = async (req, res) => {
   try {
@@ -155,17 +154,16 @@ export const update = async (req, res) => {
 
 export const createComment = async (req, res) => {
   try {
-    const postId = req.body.id;
-
-    const user = await UserModel.find({ _id: req.userId }, { fullName: 1, avatarUrl: 1 });
+    const postId = req.body.postId;
+    const text = req.body.text;
+    const userName = req.body.userName;
+    const avatarUrl = req.body.avatarUrl;
 
     await PostModel.updateOne(
       {
         _id: postId,
       },
-      {
-        comments: { text: req.body.comments, user: user },
-      },
+      { $push: { comments: { text, userName, avatarUrl } } },
     );
 
     res.json({

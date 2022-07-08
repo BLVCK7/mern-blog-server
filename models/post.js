@@ -14,6 +14,7 @@ const PostSchema = new mongoose.Schema(
     comments: {
       type: Array,
       default: [],
+      required: true,
     },
     tags: {
       type: Array,

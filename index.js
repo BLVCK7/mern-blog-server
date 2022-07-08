@@ -1,6 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
+import events from 'events';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import multer from 'multer';
@@ -14,7 +15,6 @@ import checkAuth from './middleware/checkAuth.js';
 import handleValidationErrors from './middleware/handleValidationErrors.js';
 
 import * as PostController from './controllers/PostController.js';
-import * as CommentController from './controllers/CommentController.js';
 
 mongoose
   // .connect(process.env.MONGODB_URI)
@@ -23,6 +23,8 @@ mongoose
   )
   .then(() => console.log('DB okey'))
   .catch((err) => console.log('DB err', err));
+
+export const emitter = new events.EventEmitter();
 
 const app = express();
 
