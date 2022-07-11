@@ -20,7 +20,7 @@ export const getLastTags = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const posts = await PostModel.find().populate('user').exec();
+    const posts = await PostModel.find().populate('user').sort({ viewsCount: -1 }).exec();
 
     res.json(posts);
   } catch (error) {
@@ -189,6 +189,19 @@ export const getComments = async (req, res) => {
     console.log(error);
     res.status(500).json({
       message: 'Не удалось получить комментарии',
+    });
+  }
+};
+
+export const getNewestPosts = async (req, res) => {
+  try {
+    const newestPosts = await PostModel.find().populate('user').sort({ createdAt: -1 }).exec();
+
+    res.json(newestPosts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Не удалось получить статьи',
     });
   }
 };
