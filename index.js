@@ -17,11 +17,11 @@ import handleValidationErrors from './middleware/handleValidationErrors.js';
 import * as PostController from './controllers/PostController.js';
 
 mongoose
-  // .connect(process.env.MONGODB_URI)
-  .connect(
-    'mongodb://admin:wwwwww@cluster0-shard-00-00.ngjtw.mongodb.net:27017,cluster0-shard-00-01.ngjtw.mongodb.net:27017,cluster0-shard-00-02.ngjtw.mongodb.net:27017/blog?ssl=true&replicaSet=atlas-yqjhev-shard-0&authSource=admin&retryWrites=true&w=majority',
-  )
-  .then(() => console.log('DB okey'))
+  .connect(process.env.MONGODB_URI)
+  // .connect(
+  //   'mongodb://admin:wwwwww@cluster0-shard-00-00.ngjtw.mongodb.net:27017,cluster0-shard-00-01.ngjtw.mongodb.net:27017,cluster0-shard-00-02.ngjtw.mongodb.net:27017/blog?ssl=true&replicaSet=atlas-yqjhev-shard-0&authSource=admin&retryWrites=true&w=majority',
+  // )
+  .then(() => console.log('DB okey!!!'))
   .catch((err) => console.log('DB err', err));
 
 export const emitter = new events.EventEmitter();
