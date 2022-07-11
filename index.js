@@ -155,6 +155,7 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
 });
 
 app.get('/tags', PostController.getLastTags);
+app.get('/tags/:id', PostController.getPostTags);
 
 app.get('/posts', PostController.getAll);
 app.get('/posts/newest', PostController.getNewestPosts);
